@@ -57,12 +57,12 @@ window.__ModuleLoader__.load({
     // ---------- locale dictionaries ----------
 
     const en = {
-      brandName: 'BISHENG',
+      brandName: 'WanDSH',
       brandBy: 'by dataelem',
       step0Title: 'Internal Testing Notice',
       declarationBody: "DeepSeek Harness 0.1 remains in testing for Harness developers. Many areas need further improvement, and we welcome feedback from the developer community. DeepSeek Harness's core plugins and foundational APIs will continue to evolve rapidly over the coming months.\n\nWe look forward to exploring the limits of intelligence with developers around the world, building on open-source, open, reusable, and composable infrastructure. We welcome Harness developers everywhere to join the DSH plugin ecosystem.",
-      desktopIntroTitle: 'About BISHENG',
-      desktopIntroBody: 'BISHENG is maintained by the DataElem team as the desktop edition of DeepSeek Harness — local-first and cross-platform.',
+      desktopIntroTitle: 'About WanDSH',
+      desktopIntroBody: 'WanDSH is maintained by the DataElem team as the desktop edition of DeepSeek Harness — local-first and cross-platform.',
       officialSite: 'Official site',
       officialSiteUrl: 'https://www.dshdesktop.com/',
       desktopIntroFeedback: 'Found a bug or have a suggestion? Open an issue on GitHub, or reach us through the official site.',
@@ -72,12 +72,12 @@ window.__ModuleLoader__.load({
     }
 
     const zh = {
-      brandName: 'BISHENG',
+      brandName: 'WanDSH',
       brandBy: 'by dataelem',
       step0Title: '内测声明',
       declarationBody: 'DeepSeek Harness 目前的 0.1 版本仍处在面向 Harness 开发者进行测试的阶段，还有许多地方需要持续改进和打磨，希望听取广大开发者的反馈建议。预计 DeepSeek Harness 的核心插件以及基础 API 都会在接下来的一段时间内快速迭代、持续演化。\n\n我们期待与全球开发者一起，在开源、开放、可复用、可组合的基础设施之上，共同探索智能上限。欢迎全球 Harness 开发者加入 DSH 插件生态。',
-      desktopIntroTitle: '关于 BISHENG',
-      desktopIntroBody: 'BISHENG 是由 DataElem 团队维护的 DeepSeek Harness 桌面版本，为 Harness 提供本地优先、跨平台的桌面体验。',
+      desktopIntroTitle: '关于 WanDSH',
+      desktopIntroBody: 'WanDSH 是由 DataElem 团队维护的 DeepSeek Harness 桌面版本，为 Harness 提供本地优先、跨平台的桌面体验。',
       officialSite: '官网',
       officialSiteUrl: 'https://dshdesktop.com/zh/',
       desktopIntroFeedback: '遇到问题或有功能建议？欢迎在 GitHub 提交 Issue，或在官网联系我们。',
@@ -111,7 +111,7 @@ window.__ModuleLoader__.load({
       )
     }
 
-    // The internal-testing declaration together with the BISHENG /
+    // The internal-testing declaration together with the WanDSH /
     // DataElem introduction and the project's public links. External links
     // open in the system browser via the main process's window-open handler.
     function NoticeBody({ t }) {

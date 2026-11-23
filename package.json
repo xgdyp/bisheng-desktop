@@ -324,8 +324,8 @@
     "koffi": "3.1.5"
   },
   "build": {
-    "appId": "io.bisheng",
-    "productName": "BISHENG",
+    "appId": "io.wandsh",
+    "productName": "WanDSH",
     "asar": true,
     "asarUnpack": [
       "**/*.{node,dylib,dll,so,exe}",
@@ -479,7 +479,7 @@
       }
     ],
     "detectUpdateChannel": false,
-    "artifactName": "bisheng-${os}-${arch}.${ext}",
+    "artifactName": "wandsh-${os}-${arch}.${ext}",
     "mac": {
       "notarize": false,
       "category": "public.app-category.developer-tools",
@@ -520,7 +520,7 @@
       ]
     },
     "nsis": {
-      "artifactName": "bisheng-windows-${arch}-setup.${ext}",
+      "artifactName": "wandsh-windows-${arch}-setup.${ext}",
       "include": "build/installer.nsh",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
@@ -530,7 +530,7 @@
     "afterPack": "scripts/after-pack.cjs",
     "protocols": [
       {
-        "name": "BISHENG Enterprise Login",
+        "name": "WanDSH Enterprise Login",
         "schemes": [
           "bisheng"
         ]

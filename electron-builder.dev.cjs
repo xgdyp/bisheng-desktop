@@ -2,11 +2,11 @@ const packageJson = require('./package.json')
 
 module.exports = {
   ...packageJson.build,
-  appId: 'io.bisheng.dev',
-  productName: 'BISHENG Dev',
+  appId: 'io.wandsh.dev',
+  productName: 'WanDSH Dev',
   protocols: [
     {
-      name: 'BISHENG Dev Enterprise Login',
+      name: 'WanDSH Dev Enterprise Login',
       schemes: ['bisheng-dev']
     }
   ],
@@ -16,13 +16,13 @@ module.exports = {
   },
   extraMetadata: {
     name: 'dsh-desktop-dev',
-    productName: 'BISHENG Dev',
+    productName: 'WanDSH Dev',
     dshDesktopChannel: 'development'
   },
-  artifactName: 'bisheng-dev-${os}-${arch}.${ext}',
+  artifactName: 'wandsh-dev-${os}-${arch}.${ext}',
   nsis: {
     ...packageJson.build.nsis,
-    artifactName: 'bisheng-dev-windows-${arch}-setup.${ext}'
+    artifactName: 'wandsh-dev-windows-${arch}-setup.${ext}'
   },
   publish: null
 }

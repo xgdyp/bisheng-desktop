@@ -258,7 +258,7 @@ describe('GitHub release contract', () => {
       'utf8'
     )
 
-    expect(packageJson.build.artifactName).toBe('bisheng-${os}-${arch}.${ext}')
+    expect(packageJson.build.artifactName).toBe('wandsh-${os}-${arch}.${ext}')
     expect(packageJson.build.extraResources).toContainEqual({
       from: 'build/app-icon.png',
       to: 'icon.png'
@@ -354,10 +354,10 @@ describe('GitHub release contract', () => {
     )
 
     expect(packageJson.dependencies['electron-updater']).toBeTruthy()
-    expect(packageJson.build.appId).toBe('io.bisheng')
-    expect(packageJson.build.productName).toBe('BISHENG')
+    expect(packageJson.build.appId).toBe('io.wandsh')
+    expect(packageJson.build.productName).toBe('WanDSH')
     expect(packageJson.build.protocols).toEqual([
-      { name: 'BISHENG Enterprise Login', schemes: ['bisheng'] }
+      { name: 'WanDSH Enterprise Login', schemes: ['bisheng'] }
     ])
     expect(packageJson.build.publish).toEqual([
       {
@@ -386,14 +386,14 @@ describe('GitHub release contract', () => {
       'MACOS_OUTPUT_DIR=$RUNNER_TEMP/bisheng-macos-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT-${{ matrix.arch }}'
     )
     expect(workflow).toContain('--config.directories.output="$MACOS_OUTPUT_DIR"')
-    expect(workflow).toContain('$MACOS_OUTPUT_DIR/${{ matrix.app-directory }}/BISHENG.app')
+    expect(workflow).toContain('$MACOS_OUTPUT_DIR/${{ matrix.app-directory }}/WanDSH.app')
     expect(workflow).toContain(
       'stage-development-assets.mjs ${{ matrix.arch }} "$MACOS_OUTPUT_DIR"'
     )
-    expect(workflow).not.toContain('dist/${{ matrix.app-directory }}/BISHENG.app')
-    expect(workflow).toContain('dist\\win-unpacked\\BISHENG.exe')
-    expect(workflow).toContain("--name 'BISHENG'")
-    expect(workflow).toContain('--title "BISHENG $release_tag"')
+    expect(workflow).not.toContain('dist/${{ matrix.app-directory }}/WanDSH.app')
+    expect(workflow).toContain('dist\\win-unpacked\\WanDSH.exe')
+    expect(workflow).toContain("--name 'WanDSH'")
+    expect(workflow).toContain('--title "WanDSH $release_tag"')
   })
 
   it('keeps builder jobs from attempting implicit tag publishing', async () => {
@@ -437,10 +437,10 @@ describe('GitHub release contract', () => {
     expect(packageJson.scripts['package:dev:win']).toContain('verify-target.mjs win32 x64')
     expect(packageJson.scripts['package:dev:win']).toContain('electron-builder.dev.cjs')
     expect(packageJson.scripts['package:dev:win']).toContain('--publish never')
-    expect(developmentConfig.appId).toBe('io.bisheng.dev')
-    expect(developmentConfig.productName).toBe('BISHENG Dev')
+    expect(developmentConfig.appId).toBe('io.wandsh.dev')
+    expect(developmentConfig.productName).toBe('WanDSH Dev')
     expect(developmentConfig.protocols).toEqual([
-      { name: 'BISHENG Dev Enterprise Login', schemes: ['bisheng-dev'] }
+      { name: 'WanDSH Dev Enterprise Login', schemes: ['bisheng-dev'] }
     ])
     expect(developmentConfig.directories.output).toBe('dist-dev')
     expect(developmentConfig.extraMetadata.dshDesktopChannel).toBe('development')

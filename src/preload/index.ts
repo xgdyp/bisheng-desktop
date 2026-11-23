@@ -764,7 +764,7 @@ function render(): void {
   const status = currentStatus
   const card = element('aside', 'card')
   card.setAttribute('aria-live', 'polite')
-  card.setAttribute('aria-label', locale === 'zh' ? 'BISHENG 更新' : 'BISHENG update')
+  card.setAttribute('aria-label', locale === 'zh' ? 'WanDSH 更新' : 'WanDSH update')
 
   const row = element('div', 'row')
   const badge = element('span', status.phase === 'error' ? 'badge warning' : 'badge')
@@ -928,12 +928,12 @@ function renderAbout(): void {
   const card = element('div', 'about-card')
   card.setAttribute('role', 'dialog')
   card.setAttribute('aria-modal', 'true')
-  card.setAttribute('aria-label', zh ? '关于 BISHENG' : 'About BISHENG')
+  card.setAttribute('aria-label', zh ? '关于 WanDSH' : 'About WanDSH')
 
   // Header row with Title and Close '×'
   const header = element('div', 'about-header')
   const title = element('h2', 'about-title')
-  title.textContent = zh ? '关于 BISHENG' : 'About BISHENG'
+  title.textContent = zh ? '关于 WanDSH' : 'About WanDSH'
   header.appendChild(title)
 
   const closeBtn = button('×', 'about-close')
@@ -948,7 +948,7 @@ function renderAbout(): void {
   // Body content matching user's screenshot
   const body = element('div', 'about-body')
   const line1 = element('p', 'about-line')
-  line1.textContent = `${zh ? 'BISHENG 版本： ' : 'BISHENG version: '}${info.desktopVersion}`
+  line1.textContent = `${zh ? 'WanDSH 版本： ' : 'WanDSH version: '}${info.desktopVersion}`
   body.appendChild(line1)
 
   const line2 = element('p', 'about-line')
@@ -956,7 +956,7 @@ function renderAbout(): void {
   body.appendChild(line2)
 
   const hint = element('p', 'about-hint')
-  hint.textContent = zh ? 'Harness 随 BISHENG 更新。' : 'Harness is updated with BISHENG.'
+  hint.textContent = zh ? 'Harness 随 WanDSH 更新。' : 'Harness is updated with WanDSH.'
   body.appendChild(hint)
   card.appendChild(body)
 

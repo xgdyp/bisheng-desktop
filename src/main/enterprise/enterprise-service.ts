@@ -337,7 +337,7 @@ export class EnterpriseService {
                 code_challenge: pkce.codeChallenge,
                 code_challenge_method: 'S256',
                 state: pkce.state,
-                device_name: 'BISHENG',
+                device_name: 'WanDSH',
                 ...(this.options.desktopVersion ? { client_version: this.options.desktopVersion } : {})
               }
             })

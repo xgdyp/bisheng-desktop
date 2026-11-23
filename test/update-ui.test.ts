@@ -64,7 +64,7 @@ describe('accepting an update is what starts the download', () => {
       manual: false
     }
     expect(updateMessage(available, 'zh')).toBe('发现新版本 0.4.4，是否更新？')
-    expect(updateMessage(available, 'en')).toBe('BISHENG 0.4.4 is available. Update now?')
+    expect(updateMessage(available, 'en')).toBe('WanDSH 0.4.4 is available. Update now?')
   })
 
   it('explains when the current build does not support updates', () => {

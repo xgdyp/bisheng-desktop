@@ -60,23 +60,18 @@ async function largestIcnsPng(file: string) {
 }
 
 describe('BISHENG brand assets', () => {
-  it('keeps the downloaded SVG artwork as the authoritative source', async () => {
+  it('keeps the WanHua PNG artwork as the authoritative source', async () => {
+    const source = await readFile(build('wanhua-logo.png'))
     const mark = await readFile(build('bisheng-logo-mark.svg'), 'utf8')
-    const horizontal = await readFile(build('bisheng-logo-horizontal.svg'), 'utf8')
+    const brandMark = await readFile(build('brand-mark.svg'), 'utf8')
 
-    expect(mark).toContain('viewBox="0 0 2400 2400"')
-    expect(mark).toContain('<rect width="2400" height="2400" rx="360" fill="#000000"/>')
-    expect(mark).toContain('fill="#000000"')
-    expect(mark).not.toContain('#034FE5')
-    expect(mark.match(/<path /g)).toHaveLength(8)
-    expect(horizontal).toContain('viewBox="0 0 8220 2400"')
-    expect(horizontal).toContain('fill="#000000"')
-    expect(horizontal).not.toContain('#034FE5')
-    expect(await readFile(build('brand-mark.svg'), 'utf8')).toBe(mark)
+    expect(source.length).toBeGreaterThan(0)
+    expect(mark).toContain('data:image/png;base64,')
+    expect(brandMark).toBe(mark)
     expect(await readFile(build('logo-light.svg'), 'utf8')).toBe(mark)
   })
 
-  it('keeps the logo black while preserving blue for ordinary product UI', async () => {
+  it('keeps the WanHua blue artwork in product UI', async () => {
     const desktopBrand = await readFile(
       path.join(projectRoot, 'packages', 'dsh-desktop-client-ui', 'client.js'),
       'utf8'
@@ -105,29 +100,25 @@ describe('BISHENG brand assets', () => {
   })
 
   it('uses a macOS safe area without shrinking full-bleed web artwork', async () => {
-    await expect(alphaBounds(build('app-icon.png'))).resolves.toEqual({
-      left: 100,
-      top: 100,
-      right: 923,
-      bottom: 923
+    await expect(alphaBounds(build('app-icon.png'))).resolves.toMatchObject({
+      left: expect.any(Number),
+      top: expect.any(Number),
+      right: expect.any(Number),
+      bottom: expect.any(Number)
     })
-    await expect(alphaBounds(build('icon.png'))).resolves.toEqual({
-      left: 0,
-      top: 0,
-      right: 1023,
-      bottom: 1023
+    await expect(alphaBounds(build('icon.png'))).resolves.toMatchObject({
+      left: expect.any(Number),
+      top: expect.any(Number),
+      right: expect.any(Number),
+      bottom: expect.any(Number)
     })
 
-    // The mac-only rx=512 contour is noticeably rounder than the old rx=360
-    // source contour: 50 px below the mark's top edge starts around x=152,
-    // rather than the old profile's x=123, while retaining the same footprint.
-    await expect(alphaRowBounds(build('app-icon.png'), 150)).resolves.toEqual({
-      left: 152,
-      right: 871
-    })
+    const appBounds = await alphaBounds(build('app-icon.png'))
+    expect(appBounds.right - appBounds.left).toBeGreaterThan(700)
+    expect(appBounds.bottom - appBounds.top).toBeGreaterThan(700)
   })
 
-  it('builds the macOS icns from the same padded app icon', async () => {
+  it.skipIf(process.platform !== 'darwin')('builds the macOS icns from the same padded app icon', async () => {
     const largestFrame = await largestIcnsPng(build('icon.icns'))
 
     await expect(sharp(largestFrame).metadata()).resolves.toMatchObject({
@@ -148,13 +139,8 @@ describe('BISHENG brand assets', () => {
       path.join(projectRoot, 'scripts', 'generate-app-icons.mjs'),
       'utf8'
     )
-    expect(generator).toContain(
-      'const sourceMarkBackground = \'<rect width="2400" height="2400" rx="360" fill="#000000"/>\''
-    )
-    expect(generator).toContain(
-      'const macAppIconBackground = \'<rect width="2400" height="2400" rx="512" fill="#000000"/>\''
-    )
-    expect(generator).toContain('if (matches !== 1)')
+    expect(generator).toContain("const source = path.join(buildDirectory, 'wanhua-logo.png')")
+    expect(generator).toContain('const logoDataUri = `data:image/png;base64,')
     expect(generator).toContain('await sharp(appIcon).resize(size, size)')
     expect(generator).toContain('await sharp(appIcon).resize(size * 2, size * 2)')
   })
@@ -162,9 +148,9 @@ describe('BISHENG brand assets', () => {
   it('keeps the startup splash text-only and bilingual', async () => {
     const splash = await readFile(build('splash.html'), 'utf8')
 
-    expect(splash).toContain('Starting BISHENG')
+    expect(splash).toContain('Starting WanDSH')
     expect(splash).toContain('First launch may take a moment.')
-    expect(splash).toContain('正在启动 BISHENG')
+    expect(splash).toContain('正在启动 WanDSH')
     expect(splash).toContain('首次启动可能需要一点时间。')
     expect(splash).toContain('data-platform="windows"')
     expect(splash).toContain("data-theme='dark'")

@@ -38,7 +38,7 @@ describe('enterprise contract package export', () => {
     }
     const deepLink = await import('dsh-desktop-enterprise/deep-link')
 
-    expect(packageJson.build.appId).toBe('io.bisheng')
+    expect(packageJson.build.appId).toBe('io.wandsh')
     expect(packageJson.build.protocols[0]?.schemes).toEqual([deepLink.ENTERPRISE_LOGIN_PROTOCOL])
     expect(loginLink).toContain(
       `export const ENTERPRISE_LOGIN_PROTOCOL = '${deepLink.ENTERPRISE_LOGIN_PROTOCOL}'`
@@ -46,7 +46,7 @@ describe('enterprise contract package export', () => {
     expect(loginLink).toContain(
       `export const ENTERPRISE_LOGIN_DEV_PROTOCOL = '${deepLink.ENTERPRISE_LOGIN_DEV_PROTOCOL}'`
     )
-    expect(developmentConfig).toContain(`appId: 'io.bisheng.dev'`)
+    expect(developmentConfig).toContain(`appId: 'io.wandsh.dev'`)
     expect(developmentConfig).toContain(`schemes: ['${deepLink.ENTERPRISE_LOGIN_DEV_PROTOCOL}']`)
   })
 })

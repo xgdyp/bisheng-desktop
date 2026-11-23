@@ -156,8 +156,8 @@ export async function startLoginCallbackServer(options: {
     sendHtml(
       response,
       200,
-      'Return to BISHENG',
-      'You can close this window and return to BISHENG.'
+      'Return to WanDSH',
+      'You can close this window and return to WanDSH.'
     )
     finish()
     options.onAccepted({

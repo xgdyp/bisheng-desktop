@@ -60,7 +60,7 @@ describe('LAN mobile page', () => {
     for (const script of scripts) expect(() => new Function(script)).not.toThrow()
   })
 
-  it('uses the BISHENG brand color and follows system dark mode', () => {
+  it('uses the WanDSH brand color and follows system dark mode', () => {
     const html = renderMobilePage({ locale: 'en' })
     expect(html).toContain('--brand:#034FE5')
     expect(html).toContain('prefers-color-scheme:dark')
@@ -68,10 +68,10 @@ describe('LAN mobile page', () => {
     expect(html).toContain('content="#141416" media="(prefers-color-scheme:dark)"')
     expect(html).toContain('/brand-logo/light')
     expect(html).toContain('.brand img{width:28px;height:28px')
-    expect(html).toContain('src="/brand-logo/light" alt="BISHENG"')
-    expect(html).toContain('<span>BISHENG</span>')
-    expect(html).toContain('content="BISHENG"')
-    expect(html).toContain('<title>BISHENG</title>')
+    expect(html).toContain('src="/brand-logo/light" alt="WanDSH"')
+    expect(html).toContain('<span>WanDSH</span>')
+    expect(html).toContain('content="WanDSH"')
+    expect(html).toContain('<title>WanDSH</title>')
     expect(html).not.toContain('id="chatTitle"')
     expect(html).toContain('body.chat-open header{display:none}')
     expect(html).toContain('body.chat-open .shell{padding:env(safe-area-inset-top) 14px 0}')
@@ -277,53 +277,53 @@ describe('LAN mobile page', () => {
     const session = renderMobilePage({ locale: 'zh', product: 'bisheng' })
     expect(session).not.toContain('<header>')
     expect(session).not.toContain('/brand-logo/')
-    expect(session).toContain('<title>BISHENG</title>')
-    expect(session).toContain('content="BISHENG"')
+    expect(session).toContain('<title>WanDSH</title>')
+    expect(session).toContain('content="WanDSH"')
     expect(session).toContain('继续对话')
-    expect(session).toContain('请先在 BISHENG 中创建第一个工作区。')
+    expect(session).toContain('请先在 WanDSH 中创建第一个工作区。')
     expect(session).toContain("location.replace('/disconnected?product=bisheng')")
     expect(session).toContain('if(status)')
 
     const branded = renderMobilePage({ locale: 'zh' })
-    expect(branded).toContain('src="/brand-logo/light" alt="BISHENG"')
-    expect(branded).toContain('<span>BISHENG</span>')
+    expect(branded).toContain('src="/brand-logo/light" alt="WanDSH"')
+    expect(branded).toContain('<span>WanDSH</span>')
     expect(branded).toContain('id="status"')
-    expect(branded).toContain('<title>BISHENG</title>')
+    expect(branded).toContain('<title>WanDSH</title>')
     expect(branded).not.toContain('product=bisheng')
-    expect(branded).not.toContain('DSH')
+    expect(branded).not.toContain('DSH Desktop')
 
     const pin = renderPairingPinPage('zh', 'bisheng')
     expect(pin).not.toContain('class="logo"')
     expect(pin).not.toContain('/brand-logo/')
-    expect(pin).toContain('<title>连接 BISHENG</title>')
+    expect(pin).toContain('<title>连接 WanDSH</title>')
     expect(pin).toContain('输入连接密码')
     expect(pin).toContain("location.replace('/?product=bisheng')")
-    expect(pin).toContain('请先启动 BISHENG。')
+    expect(pin).toContain('请先启动 WanDSH。')
     expect(pin).toContain('.note:empty{display:none}')
 
     const reconnect = renderMobileReconnectPage('zh', 'lan', { product: 'bisheng' })
     expect(reconnect).not.toContain('class="brand"')
-    expect(reconnect).not.toContain('BISHENG')
+    expect(reconnect).not.toContain('WanDSH')
     expect(reconnect).toContain('<title>重新连接</title>')
     expect(reconnect).toContain('连接已断开')
     expect(reconnect).toContain('href="/reconnect?product=bisheng"')
 
     const brandedPin = renderPairingPinPage('zh')
     expect(brandedPin).toContain('class="logo"')
-    expect(brandedPin).toContain('alt="BISHENG"')
-    expect(brandedPin).toContain('<title>连接 BISHENG</title>')
+    expect(brandedPin).toContain('alt="WanDSH"')
+    expect(brandedPin).toContain('<title>连接 WanDSH</title>')
     expect(brandedPin).toContain("location.replace('/')")
 
     const brandedReconnect = renderMobileReconnectPage('zh')
     expect(brandedReconnect).toContain('class="brand"')
-    expect(brandedReconnect).toContain('<span>BISHENG</span>')
-    expect(brandedReconnect).toContain('<title>重新连接 BISHENG</title>')
+    expect(brandedReconnect).toContain('<span>WanDSH</span>')
+    expect(brandedReconnect).toContain('<title>重新连接 WanDSH</title>')
     expect(brandedReconnect).toContain('href="/reconnect">')
     expect(brandedReconnect).not.toContain('product=bisheng')
-    expect(brandedReconnect).not.toContain('DSH')
+    expect(brandedReconnect).not.toContain('DSH Desktop')
   })
 
-  it('uses BISHENG styling on both pairing surfaces', () => {
+  it('uses WanDSH styling on both pairing surfaces', () => {
     const desktop = renderDesktopPairingPage({
       qrSvg: '<svg></svg>',
       pairingUrl: 'http://192.168.1.2/pair?token=test',
@@ -419,7 +419,7 @@ describe('LAN mobile page', () => {
     expect(phone).toContain("fetch('/pair/verify'")
     expect(phone).toContain('Enter pairing password')
     expect(phone).toContain('Show password on the computer')
-    expect(phone).toContain('Cannot reach the desktop. Start BISHENG and try again.')
+    expect(phone).toContain('Cannot reach the desktop. Start WanDSH and try again.')
     expect(phone).toContain("location.replace('/')")
     expect(phone).not.toContain("location.href='/'")
   })
@@ -594,7 +594,7 @@ describe('LAN mobile page', () => {
     expect(desktop).not.toContain('id="copyToast"')
     expect(phone).toContain('输入连接密码')
     expect(phone).toContain('在电脑上查看密码')
-    expect(phone).toContain('暂时无法连接桌面端，请先启动 BISHENG。')
+    expect(phone).toContain('暂时无法连接桌面端，请先启动 WanDSH。')
   })
 
   it.each(['en', 'zh'] as const)('refreshes an open %s pairing page only for a supported changed locale', async (locale) => {
@@ -689,7 +689,7 @@ describe('LAN mobile page', () => {
     })
     expect(desktop).toContain('class="phone-connected manage-connected"')
     expect(desktop).toContain('Manage phone connection')
-    expect(desktop).toContain('Your phone is currently connected to BISHENG.')
+    expect(desktop).toContain('Your phone is currently connected to WanDSH.')
     expect(desktop).toContain('.manage-connected .connection-hint,.manage-connected .done{display:none}')
     expect(desktop).toContain(
       'onclick="switchMode(false)" disabled>WiFi Connection Mode</button>'

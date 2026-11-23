@@ -39,7 +39,7 @@ export function registerDesktopNotificationBridge(
     if (!window || window.isDestroyed() || event.sender !== window.webContents ||
         event.senderFrame !== window.webContents.mainFrame) {
       audit('rejected', { reason: 'untrusted-sender' })
-      throw new Error('Work notifications require the main BISHENG window.')
+      throw new Error('Work notifications require the main WanDSH window.')
     }
     return window
   }

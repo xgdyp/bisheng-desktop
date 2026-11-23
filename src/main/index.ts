@@ -557,12 +557,12 @@ function applyWindowChromeTheme(window: BrowserWindow, isDark: boolean): void {
 function configureAppIdentity(): void {
   configureNotificationIdentity(app, process.platform, developmentBuild)
   if (developmentBuild) {
-    app.setName('BISHENG Dev')
+    app.setName('WanDSH Dev')
     app.setPath('userData', process.env.BISHENG_DEV_USER_DATA || join(app.getPath('appData'), 'bisheng-dev'))
     return
   }
 
-  app.setName('BISHENG')
+  app.setName('WanDSH')
   // Keep this directory explicit. Harness stores workspaces, sessions,
   // credentials, and custom presets below userData, so deriving the path from
   // app.getName() would make a later display-name change look like a fresh install.
@@ -987,10 +987,10 @@ function ensureTray(): void {
 
   const locale = harnessLocale()
   tray = new Tray(desktopIconPath())
-  tray.setToolTip('BISHENG')
+  tray.setToolTip('WanDSH')
   tray.setContextMenu(
     Menu.buildFromTemplate([
-      { label: locale === 'zh' ? '显示 BISHENG' : 'Show BISHENG', click: restoreMainWindow },
+      { label: locale === 'zh' ? '显示 WanDSH' : 'Show WanDSH', click: restoreMainWindow },
       { type: 'separator' },
       { label: locale === 'zh' ? '退出' : 'Exit', click: () => app.quit() }
     ])
@@ -1269,7 +1269,7 @@ async function quarantineInstalledLaunchAgentsForUpdate(dshHome: string): Promis
   }
   if (result.failures.length > 0) {
     for (const failure of result.failures) runtime.note(`[desktop] pre-update launch agent: ${failure}`)
-    throw new Error('Unable to stop background services before replacing BISHENG.')
+    throw new Error('Unable to stop background services before replacing WanDSH.')
   }
 }
 
@@ -1743,7 +1743,7 @@ function registerHarnessHandlers(): void {
   ipcMain.removeHandler('harness:restart')
   ipcMain.handle('harness:restart', async (event) => {
     if (!mainWindow || mainWindow.isDestroyed() || event.sender !== mainWindow.webContents) {
-      throw new Error('Harness restart is only available from the BISHENG window.')
+      throw new Error('Harness restart is only available from the WanDSH window.')
     }
     if (runtime.snapshot().phase !== 'ready') {
       throw new Error('Harness is not ready to restart.')
@@ -1813,7 +1813,7 @@ function registerHarnessHandlers(): void {
   ipcMain.handle('desktop-titlebar:set-theme', (event, isDark: unknown) => {
     assertTrustedMainWindowEvent(event)
     if (typeof isDark !== 'boolean') {
-      throw new Error('The BISHENG titlebar theme must be a boolean.')
+      throw new Error('The WanDSH titlebar theme must be a boolean.')
     }
     if (mainWindow) {
       applyWindowChromeTheme(mainWindow, isDark)
@@ -1849,7 +1849,7 @@ function assertTrustedMainWindowEvent(event: IpcMainInvokeEvent): void {
     event.sender !== mainWindow.webContents ||
     event.senderFrame !== mainWindow.webContents.mainFrame
   ) {
-    throw new Error('This action is only available from the main BISHENG window.')
+    throw new Error('This action is only available from the main WanDSH window.')
   }
 }
 
@@ -1887,8 +1887,8 @@ async function showAbout(window: BrowserWindow): Promise<void> {
   const checkForUpdatesLabel = locale === 'zh' ? '检查更新' : 'Check for Updates'
   const result = await dialog.showMessageBox(window, {
     type: 'info',
-    title: 'BISHENG',
-    message: locale === 'zh' ? '关于 BISHENG' : 'About BISHENG',
+    title: 'WanDSH',
+    message: locale === 'zh' ? '关于 WanDSH' : 'About WanDSH',
     detail: aboutDetail(
       app.getVersion(),
       bundledHarnessVersion(bundledRuntimeRoot()),
@@ -2040,7 +2040,7 @@ function showUnexpectedError(error: unknown): void {
   void (async () => {
     while (!quitting && !gpuFallbackRelaunching) {
       const { response } = await dialog.showMessageBox({
-        type: 'error', title: 'BISHENG',
+        type: 'error', title: 'WanDSH',
         message: zh ? '应用窗口无法继续加载' : 'The application window could not load',
         detail: message, buttons: zh ? ['退出', '重新启动', '恢复配置'] : ['Quit', 'Restart', 'Recover Configuration'],
         defaultId: 0, cancelId: 0, noLink: true
@@ -2055,7 +2055,7 @@ function showUnexpectedError(error: unknown): void {
     }
   })().catch((failure: unknown) => {
     console.error('[desktop] native recovery failed', failure)
-    dialog.showErrorBox('BISHENG', message)
+    dialog.showErrorBox('WanDSH', message)
   }).finally(() => { nativeRecoveryActive = false })
 }
 
@@ -3239,7 +3239,7 @@ function installMenu(): void {
           label: app.name,
           submenu: [
             {
-              label: isChinese ? '关于 BISHENG' : 'About BISHENG',
+              label: isChinese ? '关于 WanDSH' : 'About WanDSH',
               click: () => {
                 if (mainWindow && !mainWindow.isDestroyed()) {
                   void showAbout(mainWindow).catch(showUnexpectedError)
@@ -3348,7 +3348,7 @@ async function showMobilePairing(): Promise<void> {
     const options: MessageBoxOptions = {
       type: 'info',
       message: zh ? 'Harness 仍在启动。' : 'Harness is still starting.',
-      detail: zh ? '请等待 BISHENG 就绪后再连接手机。' : 'Wait until BISHENG is ready, then connect your phone again.',
+      detail: zh ? '请等待 WanDSH 就绪后再连接手机。' : 'Wait until WanDSH is ready, then connect your phone again.',
       buttons: [zh ? '确定' : 'OK']
     }
     await (mainWindow ? dialog.showMessageBox(mainWindow, options) : dialog.showMessageBox(options))

@@ -55,7 +55,7 @@ export function renderMobilePage({ locale, product }: MobilePageOptions): string
   const disconnectedPath = bisheng ? '/disconnected?product=bisheng' : '/disconnected'
   const header = bisheng
     ? ''
-    : `<header><div class="brand"><img class="light-logo" src="/brand-logo/light" alt="BISHENG"><img class="dark-logo" src="/brand-logo/dark" alt="BISHENG"><span>BISHENG</span></div><div id="status" class="status connecting" role="status" aria-label="${zh ? '正在连接' : 'Connecting'}"></div></header>`
+    : `<header><div class="brand"><img class="light-logo" src="/brand-logo/light" alt="WanDSH"><img class="dark-logo" src="/brand-logo/dark" alt="WanDSH"><span>WanDSH</span></div><div id="status" class="status connecting" role="status" aria-label="${zh ? '正在连接' : 'Connecting'}"></div></header>`
   return `<!doctype html>
 <html lang="${zh ? 'zh-CN' : 'en'}">
 <head>
@@ -64,10 +64,10 @@ export function renderMobilePage({ locale, product }: MobilePageOptions): string
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
   <meta name="theme-color" content="#141416" media="(prefers-color-scheme:dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="BISHENG">
+  <meta name="apple-mobile-web-app-title" content="WanDSH">
   <link rel="icon" href="/app-icon">
   <link rel="apple-touch-icon" href="/app-icon">
-  <title>BISHENG</title>
+  <title>WanDSH</title>
   <style>
     :root{color-scheme:light;--paper:#fff;--sidebar:#f7f8fa;--ink:#18191c;--muted:#81858c;--line:#e5e7eb;--card:#fff;--hover:#f2f3f5;--surface:#f7f7f5;--brand:#034FE5;--tunnel-warn-h:0px}
     @media(prefers-color-scheme:dark){:root{color-scheme:dark;--paper:#141416;--sidebar:#19191b;--ink:#f5f5f6;--muted:#95979d;--line:#303034;--card:#1d1d20;--hover:#29292d;--surface:#202023;--brand:#034FE5}}
@@ -115,7 +115,7 @@ const L=${JSON.stringify({
     toolFailed: zh ? '失败' : 'Failed',
     input: zh ? '输入' : 'Input',
     output: zh ? '输出' : 'Output'
-    ,noWorkspaces: zh ? '暂无工作区，请先在 BISHENG 中创建第一个工作区。' : 'No workspaces yet. Create your first workspace in BISHENG.'
+    ,noWorkspaces: zh ? '暂无工作区，请先在 WanDSH 中创建第一个工作区。' : 'No workspaces yet. Create your first workspace in WanDSH.'
     ,refreshed: zh ? '已刷新' : 'Updated'
     ,justNow: zh ? '刚刚' : 'Now'
     ,minute: zh ? ' 分钟前' : 'm ago'
@@ -266,8 +266,8 @@ export function renderMobileReconnectPage(
         ? '重新连接'
         : 'Reconnect'
       : zh
-        ? '重新连接 BISHENG'
-        : 'Reconnect BISHENG',
+        ? '重新连接 WanDSH'
+        : 'Reconnect WanDSH',
     heading: zh ? '连接已断开' : 'Connection lost',
     action:
       connectionMode === 'tunnel' && !expired
@@ -301,7 +301,7 @@ const brandCss = bisheng
   : `.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:22px;font-size:13px;font-weight:600}.brand img{width:28px;height:28px;object-fit:contain}.brand .dark-logo{display:none}@media(prefers-color-scheme:dark){.brand .light-logo{display:none}.brand .dark-logo{display:block}}`
 const brand = bisheng
   ? ''
-  : `<div class="brand"><img class="light-logo" src="/brand-logo/light" alt=""><img class="dark-logo" src="/brand-logo/dark" alt=""><span>BISHENG</span></div>`
+  : `<div class="brand"><img class="light-logo" src="/brand-logo/light" alt=""><img class="dark-logo" src="/brand-logo/dark" alt=""><span>WanDSH</span></div>`
 return `<!doctype html><html lang="${zh ? 'zh-CN' : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#141416" media="(prefers-color-scheme:dark)"><title>${text.title}</title><style>:root{color-scheme:light;--bg:#fff;--ink:#18191c;--muted:#81858c}@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#141416;--ink:#f5f5f6;--muted:#95979d}}*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.card{width:100%;max-width:340px;text-align:center}${brandCss}h1{margin:0;font-size:28px;line-height:1.18;letter-spacing:-.03em}.guidance{margin:13px auto 0;max-width:310px;color:var(--muted);font-size:14px;line-height:1.65}.primary{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;height:50px;margin-top:26px;border-radius:15px;background:var(--ink);color:var(--bg);font-weight:650;text-decoration:none}</style></head><body><main class="card">${brand}<h1>${text.heading}</h1><p class="guidance">${text.guidance}</p>${action}</main></body></html>`
 }
 
@@ -338,7 +338,7 @@ export function renderDesktopPairingPage(options: {
     modeLan: zh ? 'WiFi连接模式' : 'WiFi Connection Mode',
     modeTunnel: zh ? '互联网连接模式' : 'Internet Connection Mode',
     manageHeading: zh ? '管理手机连接' : 'Manage phone connection',
-    manageHint: zh ? '这台手机当前已连接到 BISHENG。' : 'Your phone is currently connected to BISHENG.',
+    manageHint: zh ? '这台手机当前已连接到 WanDSH。' : 'Your phone is currently connected to WanDSH.',
     connected: zh ? '手机已连接' : 'Phone connected',
     closeHint: zh ? '连接会在后台保持，现在可以关闭此窗口。' : 'The connection stays active in the background. You can close this window now.',
     done: zh ? '完成' : 'Done',
@@ -421,7 +421,7 @@ export function renderPairingPinPage(locale: 'en' | 'zh', product?: string | nul
   const bisheng = isBishengProduct(product)
   const homePath = bisheng ? '/?product=bisheng' : '/'
   const text = {
-    title: zh ? '连接 BISHENG' : 'Pairing BISHENG',
+    title: zh ? '连接 WanDSH' : 'Pairing WanDSH',
     heading: zh ? '输入连接密码' : 'Enter pairing password',
     hint: zh ? '在电脑「连接手机」窗口查看 6 位密码。' : 'Find the 6-digit password in Connect Phone on the computer.',
     submit: zh ? '连接' : 'Connect',
@@ -429,7 +429,7 @@ export function renderPairingPinPage(locale: 'en' | 'zh', product?: string | nul
     invalid: zh ? '连接密码不正确。' : 'That pairing password is incorrect.',
     expired: zh ? '密码已过期，请在电脑上扫描新二维码。' : 'This password expired. Scan the new QR code on the computer.',
     rateLimited: zh ? '尝试次数过多，请 {n} 分钟后再试。' : 'Too many attempts. Try again in {n} min.',
-    unavailable: zh ? '暂时无法连接桌面端，请先启动 BISHENG。' : 'Cannot reach the desktop. Start BISHENG and try again.',
+    unavailable: zh ? '暂时无法连接桌面端，请先启动 WanDSH。' : 'Cannot reach the desktop. Start WanDSH and try again.',
     connecting: zh ? '正在连接…' : 'Connecting…'
   }
   const logoCss = bisheng
@@ -437,7 +437,7 @@ export function renderPairingPinPage(locale: 'en' | 'zh', product?: string | nul
     : `.logo{width:54px;height:54px;display:grid;place-items:center;margin:0 auto 22px;border:1px solid var(--line);border-radius:16px;background:var(--card)}.logo img{width:36px;height:36px;object-fit:contain}.logo .dark-logo{display:none}@media(prefers-color-scheme:dark){.logo .light-logo{display:none}.logo .dark-logo{display:block}}`
   const logo = bisheng
     ? ''
-    : `<div class="logo"><img class="light-logo" src="/brand-logo/light" alt="BISHENG"><img class="dark-logo" src="/brand-logo/dark" alt="BISHENG"></div>`
+    : `<div class="logo"><img class="light-logo" src="/brand-logo/light" alt="WanDSH"><img class="dark-logo" src="/brand-logo/dark" alt="WanDSH"></div>`
   return `<!doctype html><html lang="${zh ? 'zh-CN' : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#141416" media="(prefers-color-scheme:dark)"><title>${text.title}</title><style>:root{color-scheme:light;--bg:#fff;--card:#fff;--panel:#f7f8fa;--ink:#18191c;--muted:#81858c;--line:#e5e7eb;--brand:#034FE5}@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#141416;--card:#1d1d20;--panel:#202023;--ink:#f5f5f6;--muted:#95979d;--line:#303034;--brand:#034FE5}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}.card{width:100%;max-width:340px;text-align:center}${logoCss}h1{font-size:24px;line-height:1.25;font-weight:600;margin:0 0 8px}p{margin:0;color:var(--muted)}input{width:100%;height:52px;margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);text-align:center;font:28px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.28em}button{width:100%;height:44px;margin-top:12px;border:1px solid var(--ink);border-radius:12px;background:var(--ink);color:var(--bg);font:inherit;font-weight:600;cursor:pointer}button.quiet{border-color:var(--line);background:transparent;color:var(--ink)}.note{min-height:20px;margin-top:14px;padding:10px 12px;border-radius:10px;background:var(--panel);color:#e34d59;font-size:13px}.note:empty{display:none}button:disabled{opacity:.55;cursor:default}</style></head><body><div class="card">${logo}<h1>${text.heading}</h1><p>${text.hint}</p><form onsubmit="return submitPin(event)"><input id="pin" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="\\d{6}" required><button id="submit" type="submit">${text.submit}</button></form><button class="quiet" type="button" onclick="showPinOnDesktop()">${text.showPin}</button><div id="status" class="note"></div></div><script>const T=${JSON.stringify(text)};
 async function submitPin(event){event.preventDefault();const pin=document.getElementById('pin').value.trim(),status=document.getElementById('status'),submit=document.getElementById('submit');submit.disabled=true;status.textContent=T.connecting;try{const r=await fetch('/pair/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({pin})});const j=await r.json();if(r.status===429){const minutes=Math.max(1,Math.ceil(Number(j.retryAfter||r.headers.get('retry-after')||60)/60));status.textContent=T.rateLimited.replace('{n}',String(minutes));return false}if(j.ok){location.replace('${homePath}');return false}status.textContent=j.rescan||j.error==='expired'?T.expired:T.invalid}catch{status.textContent=T.unavailable}finally{submit.disabled=false}return false}
 async function showPinOnDesktop(){try{await fetch('/pair/retry',{method:'POST',headers:{'content-type':'application/json'},body:'{}'})}catch{}}</script></body></html>`

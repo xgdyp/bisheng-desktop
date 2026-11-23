@@ -47,7 +47,7 @@
   </head>
   <body>
     <main>
-      <h1 class="title" id="title">Starting BISHENG</h1>
+      <h1 class="title" id="title">Starting WanDSH</h1>
       <p class="status" id="status">First launch may take a moment.</p>
     </main>
     <script>
@@ -57,7 +57,7 @@
         : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en'
       document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en'
       if (locale === 'zh') {
-        document.getElementById('title').textContent = '正在启动 BISHENG'
+        document.getElementById('title').textContent = '正在启动 WanDSH'
         document.getElementById('status').textContent = '首次启动可能需要一点时间。'
       }
     </script>

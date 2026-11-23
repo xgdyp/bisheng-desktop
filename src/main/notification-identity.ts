@@ -4,5 +4,5 @@ export function configureNotificationIdentity(
   platform: NodeJS.Platform,
   development: boolean
 ): void {
-  if (platform === 'win32') app.setAppUserModelId(development ? 'io.bisheng.dev' : 'io.bisheng')
+  if (platform === 'win32') app.setAppUserModelId(development ? 'io.wandsh.dev' : 'io.wandsh')
 }

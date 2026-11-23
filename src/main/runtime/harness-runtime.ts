@@ -614,7 +614,7 @@ export class HarnessRuntime {
       ? this.options.dshSafePatchPath
       : this.options.dshPatchPath
     if (!existsSync(sourcePatchPath)) {
-      this.setState('failed', `BISHENG patch was not found: ${sourcePatchPath}`)
+      this.setState('failed', `WanDSH patch was not found: ${sourcePatchPath}`)
       return
     }
     await mkdir(this.options.dshHome, { recursive: true })

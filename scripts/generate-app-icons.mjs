@@ -10,45 +10,25 @@ const sharp = require('sharp')
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const buildDirectory = path.join(projectRoot, 'build')
-const markSource = path.join(buildDirectory, 'bisheng-logo-mark.svg')
-const horizontalSource = path.join(buildDirectory, 'bisheng-logo-horizontal.svg')
+const source = path.join(buildDirectory, 'wanhua-logo.png')
 const appIcon = path.join(buildDirectory, 'app-icon.png')
 const webIcon = path.join(buildDirectory, 'icon.png')
 const iconsetDirectory = path.join(buildDirectory, 'app-icon.iconset')
 const icnsDestination = path.join(buildDirectory, 'icon.icns')
 const icoDestination = path.join(buildDirectory, 'icon.ico')
 const appIconCanvasSize = 1024
-const appIconMarkSize = 824
-const sourceMarkBackground = '<rect width="2400" height="2400" rx="360" fill="#000000"/>'
-const macAppIconBackground = '<rect width="2400" height="2400" rx="512" fill="#000000"/>'
+const appIconMarkSize = 900
 
-const markSvg = await readFile(markSource)
-const horizontalSvg = await readFile(horizontalSource)
+const logoPng = await readFile(source)
+const logoDataUri = `data:image/png;base64,${logoPng.toString('base64')}`
+const logoSvg = `<svg width="2400" height="2400" viewBox="0 0 2400 2400" xmlns="http://www.w3.org/2000/svg"><image href="${logoDataUri}" x="0" y="0" width="2400" height="2400" preserveAspectRatio="xMidYMid meet"/></svg>\n`
 
-function createMacAppIconSvg(svg) {
-  const source = svg.toString('utf8')
-  const matches = source.split(sourceMarkBackground).length - 1
-  if (matches !== 1) {
-    throw new Error(
-      `Expected exactly one authoritative BISHENG mark background (${sourceMarkBackground}); found ${matches}.`
-    )
-  }
-
-  // macOS does not publish one fixed corner radius for legacy ICNS artwork.
-  // This radius matches the contour of Apple's icon template and current system
-  // icons while the 824 px footprint preserves the existing 100 px safe area.
-  return Buffer.from(source.replace(sourceMarkBackground, macAppIconBackground))
+async function rasterise(input, width, height, destination) {
+  await sharp(input).resize(width, height, { fit: 'contain' }).png().toFile(destination)
 }
 
-async function rasterise(svg, width, height, destination) {
-  await sharp(svg)
-    .resize(width, height, { fit: 'contain' })
-    .png()
-    .toFile(destination)
-}
-
-async function rasterisePaddedAppIcon(svg, destination) {
-  const mark = await sharp(svg)
+async function rasterisePaddedAppIcon(destination) {
+  const mark = await sharp(logoPng)
     .resize(appIconMarkSize, appIconMarkSize, { fit: 'contain' })
     .png()
     .toBuffer()
@@ -70,20 +50,13 @@ async function rasterisePaddedAppIcon(svg, destination) {
     .toFile(destination)
 }
 
-// These SVGs are compatibility aliases consumed by older runtime surfaces.
-// The bisheng-logo-* files above remain the only authoritative source artwork.
-await copyFile(markSource, path.join(buildDirectory, 'brand-mark.svg'))
-await copyFile(markSource, path.join(buildDirectory, 'logo-light.svg'))
-await rasterisePaddedAppIcon(createMacAppIconSvg(markSvg), appIcon)
-await rasterise(markSvg, 1024, 1024, webIcon)
-await rasterise(markSvg, 240, 240, path.join(buildDirectory, 'logo-light.png'))
-await rasterise(markSvg, 240, 240, path.join(buildDirectory, 'logo-dark.png'))
-await rasterise(
-  horizontalSvg,
-  1644,
-  480,
-  path.join(projectRoot, 'docs', 'images', 'readme-logo-black-v020.png')
-)
+await writeFile(path.join(buildDirectory, 'bisheng-logo-mark.svg'), logoSvg)
+await writeFile(path.join(buildDirectory, 'brand-mark.svg'), logoSvg)
+await writeFile(path.join(buildDirectory, 'logo-light.svg'), logoSvg)
+await rasterisePaddedAppIcon(appIcon)
+await rasterise(logoPng, 1024, 1024, webIcon)
+await rasterise(logoPng, 240, 240, path.join(buildDirectory, 'logo-light.png'))
+await rasterise(logoPng, 240, 240, path.join(buildDirectory, 'logo-dark.png'))
 
 await rm(iconsetDirectory, { recursive: true, force: true })
 await mkdir(iconsetDirectory, { recursive: true })
@@ -98,12 +71,12 @@ for (const size of [16, 32, 128, 256, 512]) {
 execFileSync('iconutil', ['-c', 'icns', iconsetDirectory, '-o', icnsDestination])
 
 const icoSizes = [16, 24, 32, 48, 64, 128, 256]
-const icoDirectory = await mkdtemp(path.join(os.tmpdir(), 'bisheng-icons-'))
+const icoDirectory = await mkdtemp(path.join(os.tmpdir(), 'wandsh-icons-'))
 try {
   const icoImages = []
   for (const size of icoSizes) {
     const destination = path.join(icoDirectory, `icon-${size}.png`)
-    await sharp(markSvg).resize(size, size).png().toFile(destination)
+    await sharp(appIcon).resize(size, size).png().toFile(destination)
     icoImages.push(await readFile(destination))
   }
   const header = Buffer.alloc(6 + icoImages.length * 16)
@@ -130,4 +103,4 @@ try {
   await rm(icoDirectory, { recursive: true, force: true })
 }
 
-console.log('Generated BISHENG app, web, mobile, README, macOS, and Windows brand assets.')
+console.log('Generated WanDSH app, web, mobile, README, macOS, and Windows brand assets.')
